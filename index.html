@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff3f3">
+  <meta name="description" content="欢迎来到小猫家园，离线合成可爱猫咪。">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="小猫家园">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>小猫家园 · 喵喵合成乐</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="cat-home.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="cat-home.svg">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cat-theme.css">
+  <link rel="stylesheet" href="polish.css">
+</head>
+<body class="cat-theme">
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="小猫家园首页">
+        <span class="brand-mark">🐾</span>
+        <span><strong id="gameTitle">小猫家园</strong><small id="gameSubtitle">放下小猫，收获一团软萌</small></span>
+      </a>
+      <div class="stats" aria-live="polite">
+        <div class="stat"><span id="scoreLabel">本局得分</span><strong id="score">0</strong></div>
+        <div class="stat"><span id="bestLabel">最高纪录</span><strong id="best">0</strong></div>
+      </div>
+      <nav class="toolbar" aria-label="游戏操作">
+        <button class="icon-button" id="soundButton" type="button" aria-label="开关音效" title="开关音效">♫</button>
+        <button class="icon-button" id="themeButton" type="button" aria-label="切换主题" title="切换主题">☼</button>
+        <button class="install-button" id="installButton" type="button">📲 <span id="installLabel">安装小猫家园</span></button>
+        <button class="restart-button" id="restartButton" type="button"><span aria-hidden="true">↻</span> <span id="restartLabel">重新开始</span></button>
+      </nav>
+    </header>
+
+    <section class="game-layout" aria-label="合成游戏">
+      <div class="game-column">
+        <div class="game-heading">
+          <div><span class="eyebrow" id="eyebrow">欢迎回到猫咪小窝</span><h1 id="welcomeTitle">让小猫咪们团团相遇</h1></div>
+          <div class="next-card"><span id="nextLabel">下一只</span><strong id="nextItem">🐱</strong></div>
+        </div>
+        <div class="board-frame" id="boardFrame">
+          <canvas id="gameCanvas" aria-label="游戏区域。点击或轻触投放，合并相同小猫。"></canvas>
+          <div class="board-hint" id="boardHint"><span>↔</span> 移动鼠标 / 手指选择投放位置</div>
+          <div class="message-toast" id="toast" role="status"></div>
+          <div class="end-screen hidden" id="endScreen">
+            <div class="end-card"><span class="end-emoji" id="endEmoji">😻</span><p class="eyebrow" id="endEyebrow">喵呜，玩得真棒</p><h2 id="endTitle">再陪小猫玩一局吗？</h2><p><span id="resultLabel">本局鱼干</span> <strong id="resultScore">0</strong></p><p class="best-note" id="endBest">最高鱼干 0</p><button class="primary-button" id="playAgainButton" type="button">🐾 再玩一次</button></div>
+          </div>
+        </div>
+        <div class="mobile-controls" aria-label="触屏操作"><button id="leftButton" type="button" aria-label="向左移动">←</button><button id="dropButton" type="button">轻触投放 <span>↓</span></button><button id="rightButton" type="button" aria-label="向右移动">→</button></div>
+        <p class="controls-note" id="controlsNote">点击 / 轻触投放 · A D 或 ← → 移动 · 空格投放 · R 重开</p>
+      </div>
+
+      <aside class="side-panel">
+        <section class="panel-card guide-card"><span class="panel-icon">🐈</span><h2 id="guideTitle">猫咪成长手册</h2><p id="guideText">让两只相同的小猫咪碰在一起，它们就会合成更大、更萌的猫咪伙伴！</p><div class="chain" id="chain" aria-label="猫咪成长顺序"></div></section>
+        <section class="panel-card record-card"><span class="panel-icon">🏡</span><h2 id="recordTitle">猫窝小记录</h2><div class="record-row"><span id="recordScoreLabel">本局鱼干</span><strong id="recordScore">0</strong></div><div class="record-row"><span id="recordBestLabel">最多鱼干</span><strong id="recordBest">0</strong></div><p class="privacy-note" id="privacyNote">🔒 记录只保存在这台设备，不联网、不上传。</p></section>
+        <section class="tip-card"><span>🐟</span><p id="tipText">小秘诀：轻轻调整投放位置，让相同花色的小猫靠在一起吧！</p></section>
+      </aside>
+    </section>
+    <footer><span id="footerText">一个安静的离线小游戏 · 没有广告，没有排行榜</span><span class="offline-badge"><i></i><span id="offlineLabel">离线也能玩</span></span></footer>
+  </main>
+  <dialog class="install-dialog" id="installDialog" aria-labelledby="installTitle">
+    <form method="dialog" class="install-card">
+      <button class="dialog-close" aria-label="关闭">×</button>
+      <span class="install-mascot">🐈</span>
+      <p class="eyebrow">把猫咪小窝带在身边</p>
+      <h2 id="installTitle">安装小猫家园</h2>
+      <p class="install-intro">添加到主屏幕后，就像一款小小的猫咪游戏；首次打开后还能离线玩。</p>
+      <section class="install-step" id="androidInstallStep"><strong>🤖 Android / 桌面 Chrome</strong><span>点下方按钮安装。若浏览器没有弹窗，请打开菜单，选择“安装应用”或“添加到主屏幕”。</span><button class="primary-button" id="nativeInstallButton" type="button">📲 安装应用</button></section>
+      <section class="install-step"><strong>🍎 iPhone / iPad</strong><span>用 Safari 打开发布网址 → 点“分享”图标 → 选择“添加到主屏幕”。之后从主屏幕图标启动即可。</span></section>
+      <p class="install-footnote">安装需要通过 HTTPS 发布网址访问；本地双击文件也可以直接玩。</p>
+    </form>
+  </dialog>
+  <script src="config.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
